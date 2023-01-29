@@ -1,9 +1,15 @@
 import Link from 'next/link';
+import classes from './main-navigation.module.css';
+import Logo from '@/component/layout/logo';
 
 export default function MainNavigation() {
 	return (
-		<header>
-			<Link href={'/'}>{/*<Logo />*/}</Link>
+		<header className={classes.header}>
+			<Link href={'/'} legacyBehavior>
+				<a>
+					<Logo />
+				</a>
+			</Link>
 			<nav>
 				<ul>
 					<li>
