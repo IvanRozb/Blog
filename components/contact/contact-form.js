@@ -1,25 +1,73 @@
 import classes from './contact-form.module.css';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Notification from '@/components/ui/notification';
+
+async function sendContactData(data) {
+	const response = await fetch('api/contact', {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+
+	if (!response.ok) throw new Error(data.message || 'Error to fetch contact');
+}
 
 export function ContactForm() {
 	const emailInputRef = useRef('');
 	const nameInputRef = useRef('');
 	const messageInputRef = useRef('');
+	const [responseStatus, setResponseStatus] = useState('');
+	const [responseError, setResponseError] = useState();
 
-	function submitContactHandler(event) {
+	useEffect(() => {
+		if (responseStatus === 'success' || responseStatus === 'error') {
+			const timer = setTimeout(() => {
+				setResponseStatus(null);
+				setResponseError(null);
+			}, 3000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [responseStatus]);
+
+	async function submitContactHandler(event) {
 		event.preventDefault();
 
-		fetch('api/contact', {
-			method: 'POST',
-			body: JSON.stringify({
+		setResponseStatus('pending');
+		try {
+			await sendContactData({
 				email: emailInputRef.current.value,
 				name: nameInputRef.current.value,
 				message: messageInputRef.current.value,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
+			});
+			setResponseStatus('success');
+		} catch (error) {
+			setResponseError(error);
+			setResponseStatus('error');
+		}
+	}
+
+	let notification;
+	if (responseStatus === 'pending') {
+		notification = {
+			status: responseStatus,
+			message: 'Your message is on the way!',
+			title: 'Sending message...',
+		};
+	} else if (responseStatus === 'success') {
+		notification = {
+			status: responseStatus,
+			message: 'Your message is already transferred!',
+			title: 'Message has received!',
+		};
+	} else if (responseStatus === 'error') {
+		notification = {
+			status: responseStatus,
+			message: responseError,
+			title: 'Error!',
+		};
 	}
 
 	return (
@@ -59,6 +107,13 @@ export function ContactForm() {
 					<button>Send Message</button>
 				</div>
 			</form>
+			{notification && (
+				<Notification
+					status={notification.status}
+					title={notification.title}
+					message={notification.message}
+				/>
+			)}
 		</section>
 	);
 }
