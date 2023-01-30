@@ -15,16 +15,6 @@ export default function PostContent(props) {
 	const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
 	const customRenderers = {
-		// img(image) {
-		// 	return (
-		// 		<Image
-		// 			src={`/images/posts/${post.slug}/${image.src}`}
-		// 			alt={image.alt}
-		// 			width={800}
-		// 			height={400}
-		// 		/>
-		// 	);
-		// },
 		p(paragraph) {
 			const { node } = paragraph;
 
