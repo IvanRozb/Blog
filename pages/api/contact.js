@@ -1,6 +1,4 @@
 import { MongoClient } from 'mongodb';
-import fs from 'fs';
-import path from 'path';
 
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
@@ -24,9 +22,7 @@ export default async function handler(req, res) {
 			message,
 		};
 
-		const connectingString = fs
-			.readFileSync(path.join(process.cwd(), 'connect-string.txt'))
-			.toString();
+		const connectingString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_cluster_name}.mcgcxdw.mongodb.net/${process.env.mongodb_db_name}?retryWrites=true&w=majority`;
 
 		let client;
 		try {
