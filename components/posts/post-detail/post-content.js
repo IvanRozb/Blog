@@ -6,7 +6,7 @@ const TEST_DATA = {
 	title: 'Getting Started With Next JS1',
 	date: '2023-01-29',
 	image: 'getting-started-nextjs.png',
-	slug: 'getting-started-nextjs1',
+	slug: 'getting-started-nextjs',
 	content: '# This is the first post',
 };
 

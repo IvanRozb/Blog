@@ -7,7 +7,7 @@ const TEST_DATA = [
 		excerpt:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium, libero eu laoreet sagittis, purus risus dignissim tellus, id mollis. ',
 		image: 'getting-started-nextjs.png',
-		slug: 'getting-started-nextjs1',
+		slug: 'getting-started-nextjs',
 	},
 	{
 		title: 'Getting Started With Next JS2',
