@@ -6,6 +6,7 @@ export default function App({ Component, pageProps }) {
 	return (
 		<Layout>
 			<Head>
+				<link rel="shortcut icon" href="/favicon.ico" />
 				<title></title>
 				<meta
 					name={'viewport'}
