@@ -11,7 +11,7 @@ async function sendContactData(data) {
 		},
 	});
 
-	if (!response.ok) throw new Error(data.message || 'Error to fetch contact');
+	if (!response.ok) throw new Error(response.statusText);
 }
 
 export function ContactForm() {
@@ -44,7 +44,7 @@ export function ContactForm() {
 			});
 			setResponseStatus('success');
 		} catch (error) {
-			setResponseError(error);
+			setResponseError(error.message);
 			setResponseStatus('error');
 		}
 	}
