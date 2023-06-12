@@ -3,6 +3,8 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 
 export default function ContactPage() {
+	console.log(process.env)
+
 	return (
 		<Fragment>
 			<Head>

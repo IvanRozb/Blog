@@ -21,11 +21,15 @@ export default async function handler(req, res) {
 			name,
 			message,
 		};
+		console.log(process.env.connectingString)
 
 		let client;
 		try {
+			console.log("1IIIAWFAWFAWFAWFAWFAWF///////////////////////////////////////////////////////////////////")
 			client = await MongoClient.connect(process.env.connectingString);
 		} catch {
+
+			console.log("2IIIAWFAWFAWFAWFAWFAWF///////////////////////////////////////////////////////////////////")
 			res.status(500).json({ message: 'Could not connect to database.' });
 			return;
 		}
